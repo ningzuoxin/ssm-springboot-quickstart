@@ -4,7 +4,7 @@
 基于SpringBoot2.0整合MybatisPlus快速搭建SSM项目脚手架
 
 #### 软件架构
-SpringBoot 2.2.5 + MyBatis Plus 3.3.1 + Hutool 5.1.5
+SpringBoot 2.2.5 + MyBatis Plus 3.3.1 + Hutool 5.1.5 + Undertow 2.2.5
 
 
 #### 安装教程

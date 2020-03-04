@@ -24,6 +24,7 @@
         <lombok.version>1.18.12</lombok.version>
         <mybatis.plus.version>3.3.1</mybatis.plus.version>
         <velocity.version>2.2</velocity.version>
+        <knife4j.version>2.0.1</knife4j.version>
     </properties>
 
     <dependencies>
@@ -76,6 +77,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+        <!--Knife4j接口文档-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>${knife4j.version}</version>
         </dependency>
 
         <!--MySQL-->
