@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration monitorInterval="6000">
+
+    <Properties>
+        <property name="LOG_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+        <property name="FILE_PATH" value="./logs"/>
+        <property name="FILE_NAME" value="ssm_springboot_quickstart"/>
+    </Properties>
+
+    <appenders>
+        <!--控制台输出日志配置-->
+        <console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+        </console>
+
+        <!--INFO输出日志配置-->
+        <RollingFile name="RollingFileInfo" fileName="${FILE_PATH}/${FILE_NAME}_info.log" filePattern="${FILE_PATH}/${FILE_NAME}_info_%d{yyyy-MM-dd}_%i.log.gz">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!--interval属性用来指定多久滚动一次，默认是1 hour-->
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
+            <DefaultRolloverStrategy max="15"/>
+        </RollingFile>
+
+        <!--ERROR输出日志配置-->
+        <RollingFile name="RollingFileError" fileName="${FILE_PATH}/${FILE_NAME}_error.log" filePattern="${FILE_PATH}/${FILE_NAME}_error_%d{yyyy-MM-dd}_%i.log.gz">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!--interval属性用来指定多久滚动一次，默认是1 hour-->
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
+            <DefaultRolloverStrategy max="15"/>
+        </RollingFile>
+    </appenders>
+
+    <loggers>
+        <root level="info">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo"/>
+            <appender-ref ref="RollingFileError"/>
+        </root>
+    </loggers>
+
+</configuration>

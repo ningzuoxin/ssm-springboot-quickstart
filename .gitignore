@@ -21,6 +21,8 @@ target/
 .mvn
 *.cmd
 mvnw
+.logs
+*.log
 
 ### NetBeans ###
 /nbproject/private/
