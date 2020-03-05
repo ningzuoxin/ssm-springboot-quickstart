@@ -1,6 +1,8 @@
 package com.ning.modular.service;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.ning.core.model.Result;
+import com.ning.core.util.RedisUtil;
 import com.ning.modular.dao.UserDao;
 import com.ning.modular.entity.User;
 import org.springframework.stereotype.Service;
@@ -38,7 +40,11 @@ public class UserService {
      */
     public Result list() {
         Result result = new Result();
-        List<User> userList = userDao.selectAll();
+        List<User> userList = RedisUtil.get("USER_LIST", List.class);
+        if (ObjectUtil.isEmpty(userList)) {
+            userList = userDao.selectAll();
+            RedisUtil.set("USER_LIST", userList, 10000);
+        }
         result.setData(userList);
         return result;
     }
