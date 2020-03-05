@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+日志级别从低到高分为TRACE < DEBUG < INFO < WARN < ERROR < FATAL，如果设置为WARN，则低于WARN的信息都不会输出。
+-->
 <configuration monitorInterval="6000">
 
     <Properties>
         <property name="LOG_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
-        <property name="FILE_PATH" value="./logs"/>
+        <property name="FILE_PATH" value="D:\\prod_logs"/>
         <property name="FILE_NAME" value="ssm_springboot_quickstart"/>
     </Properties>
 
@@ -15,7 +18,8 @@
         </console>
 
         <!--INFO输出日志配置-->
-        <RollingFile name="RollingFileInfo" fileName="${FILE_PATH}/${FILE_NAME}_info.log" filePattern="${FILE_PATH}/${FILE_NAME}_info_%d{yyyy-MM-dd}_%i.log.gz">
+        <RollingFile name="RollingFileInfo" fileName="${FILE_PATH}/${FILE_NAME}_info.log"
+                     filePattern="${FILE_PATH}/${FILE_NAME}_info_%d{yyyy-MM-dd}_%i.log.gz">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
@@ -29,7 +33,8 @@
         </RollingFile>
 
         <!--ERROR输出日志配置-->
-        <RollingFile name="RollingFileError" fileName="${FILE_PATH}/${FILE_NAME}_error.log" filePattern="${FILE_PATH}/${FILE_NAME}_error_%d{yyyy-MM-dd}_%i.log.gz">
+        <RollingFile name="RollingFileError" fileName="${FILE_PATH}/${FILE_NAME}_error.log"
+                     filePattern="${FILE_PATH}/${FILE_NAME}_error_%d{yyyy-MM-dd}_%i.log.gz">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>

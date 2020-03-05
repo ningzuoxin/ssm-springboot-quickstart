@@ -17,6 +17,8 @@ spring:
       max-lifetime: 180000
       connection-timeout: 30000
       connection-test-query: SELECT 1
+  profiles:
+    active: @spring.active@
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
