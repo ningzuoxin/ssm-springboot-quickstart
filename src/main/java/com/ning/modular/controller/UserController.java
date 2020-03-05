@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/user")
-@Api(value = "用户", description = "用户", tags = "user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(value = "用户管理", description = "用户管理", tags = "用户管理", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
     @Resource
@@ -37,8 +37,21 @@ public class UserController {
      * @return
      */
     @ApiOperation(value = "查询列表")
-    @PostMapping(value = "list")
+    @PostMapping(value = "/list")
     public Result<List> list() {
         return userService.list();
     }
+
+    /**
+     * 查询用户
+     *
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "查询用户")
+    @PostMapping(value = "/get")
+    public Result<User> get(Integer id) {
+        return userService.get(id);
+    }
+
 }
