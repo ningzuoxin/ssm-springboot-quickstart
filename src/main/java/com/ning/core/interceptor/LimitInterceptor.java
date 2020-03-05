@@ -15,6 +15,7 @@ import java.io.OutputStream;
 /**
  * 接口防刷拦截器
  */
+@SuppressWarnings("ALL")
 @Component
 public class LimitInterceptor extends HandlerInterceptorAdapter {
 
