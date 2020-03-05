@@ -1,5 +1,7 @@
 package com.ning.modular.controller;
 
+import cn.hutool.core.date.DateUtil;
+import com.ning.core.annotation.AccessLimit;
 import com.ning.core.model.Result;
 import com.ning.modular.entity.User;
 import com.ning.modular.service.UserService;
@@ -18,6 +20,21 @@ public class UserController {
 
     @Resource
     UserService userService;
+
+    /**
+     * API防刷
+     *
+     * @return
+     */
+    @ApiOperation(value = "API防刷")
+    @ResponseBody
+    @PostMapping("/moreAPI")
+    @AccessLimit(seconds = 5, maxCount = 3, isLogin = false)
+    public Result<String> moreAPI() {
+        Result<String> result = new Result<>();
+        result.setData("SUCCESS => " + DateUtil.now());
+        return result;
+    }
 
     /**
      * 添加User
