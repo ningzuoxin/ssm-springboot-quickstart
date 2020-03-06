@@ -32,7 +32,15 @@ spring:
         max-idle: 8
         min-idle: 0
 
+# mybatis-plus
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
   type-aliases-package: com.ning.modular.entity
 
+# beetl模板引擎
+beetl:
+  suffix: html
+
+# beetlsql
+beetlsql:
+  enabled: false # 禁用beetlsql

@@ -1,4 +1,4 @@
-package com.ning.modular.controller;
+package com.ning.modular.controller.api;
 
 import cn.hutool.core.date.DateUtil;
 import com.ning.core.annotation.AccessLimit;
