@@ -1,21 +1,29 @@
 package com.ning.modular.service;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.dynamic.datasource.annotation.DS;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ning.core.model.Result;
 import com.ning.core.util.RedisUtil;
 import com.ning.modular.dao.UserDao;
+import com.ning.modular.dao.slave.MenuDao;
 import com.ning.modular.entity.User;
+import com.ning.modular.entity.slave.Menu;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
 
     @Resource
     UserDao userDao;
+    @Resource
+    MenuDao menuDao;
 
     /**
      * 添加User
@@ -62,6 +70,20 @@ public class UserService {
     public Result get(Integer id) {
         Result result = new Result();
         result.setData(userDao.selectById(id));
+        return result;
+    }
+
+    /**
+     * 多数据源查询
+     *
+     * @return
+     */
+    public Result moreDb() {
+        Result result = new Result();
+        Map<String, Object> map = new HashMap<>();
+        map.put("users", userDao.selectAll());
+        map.put("menus", menuDao.selectList(new QueryWrapper<>()));
+        result.setData(map);
         return result;
     }
 

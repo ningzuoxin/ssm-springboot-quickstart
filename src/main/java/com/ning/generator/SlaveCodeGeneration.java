@@ -14,7 +14,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CodeGeneration {
+/**
+ * 从库代码生成器
+ */
+@SuppressWarnings("ALL")
+public class SlaveCodeGeneration {
 
     public static void main(String[] args) {
         // 代码生成器
@@ -48,14 +52,14 @@ public class CodeGeneration {
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/my_test_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/my_test_db2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT");
         mpg.setDataSource(dsc);
 
         // 数据库表配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setTablePrefix(new String[]{"user_"}); // 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[]{""}); // 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"user"}); // 需要生成的表
+        strategy.setInclude(new String[]{"menu"}); // 需要生成的表
 
         strategy.setRestControllerStyle(true);
         strategy.setSuperServiceClass(null);
@@ -73,8 +77,8 @@ public class CodeGeneration {
         pc.setService("service");
         pc.setServiceImpl("service.impl");
         pc.setXml("mapper");
-        pc.setMapper("dao");
-        pc.setEntity("entity");
+        pc.setMapper("dao.slave");
+        pc.setEntity("entity.slave");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -113,7 +117,7 @@ public class CodeGeneration {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                return projectPath + "/src/main/resources/mapper/slave/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
         cfg.setFileOutConfigList(focList);

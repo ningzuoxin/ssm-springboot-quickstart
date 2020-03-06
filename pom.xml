@@ -28,6 +28,7 @@
         <commons.pool2.version>2.8.0</commons.pool2.version>
         <beetl.version>1.2.23.RELEASE</beetl.version>
         <spring.session.version>2.2.2.RELEASE</spring.session.version>
+        <dynamic.datasource.version>3.0.0</dynamic.datasource.version>
     </properties>
 
     <dependencies>
@@ -160,6 +161,13 @@
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
             <version>${spring.session.version}</version>
+        </dependency>
+
+        <!--DynamicDatasource多数据源-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>${dynamic.datasource.version}</version>
         </dependency>
 
     </dependencies>

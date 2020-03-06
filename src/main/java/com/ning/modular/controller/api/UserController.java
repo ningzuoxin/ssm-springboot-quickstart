@@ -113,4 +113,15 @@ public class UserController {
         return result;
     }
 
+    /**
+     * 多数据源查询
+     *
+     * @return
+     */
+    @ApiOperation(value = "多数据源查询")
+    @PostMapping(value = "/moreDb")
+    public Result moreDb() {
+        return userService.moreDb();
+    }
+
 }

@@ -7,10 +7,11 @@ server:
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/my_test_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
-    username: root
-    password: 123456
+    #    单数据源时，打开以下注释
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://127.0.0.1:3306/my_test_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    #    username: root
+    #    password: 123456
     hikari:
       minimum-idle: 5
       idle-timeout: 180000
@@ -20,8 +21,27 @@ spring:
       max-lifetime: 180000
       connection-timeout: 30000
       connection-test-query: SELECT 1
+    # 多数据源配置
+    dynamic:
+      primary: master # 设置默认的数据源或者数据源组，默认值即为master。
+      strict: false # 设置严格模式，默认false不启动。启动后在未匹配到指定数据源时候回抛出异常，不启动会使用默认数据源。
+      datasource:
+        # 主库
+        master:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/my_test_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+          username: root
+          password: 123456
+        # 从库
+        slave:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/my_test_db2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+          username: root
+          password: 123456
+  # 激活的配置文件
   profiles:
     active: @spring.active@
+  # Redis连接
   redis:
     host: 127.0.0.1
     port: 6379
@@ -34,6 +54,7 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
+  # SpringSession
   session:
     store-type: redis # 会话存储类型
     redis:
