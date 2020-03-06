@@ -27,4 +27,18 @@ public class AdminUserService {
         return userPage;
     }
 
+    /**
+     * 登录
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    public User login(String username, String password) {
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.eq("name", username);
+        userQueryWrapper.eq("password", password);
+        return userDao.selectOne(userQueryWrapper);
+    }
+
 }

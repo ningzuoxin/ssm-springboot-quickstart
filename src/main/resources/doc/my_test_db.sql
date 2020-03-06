@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2020-03-04 14:15:33
+Date: 2020-03-06 15:14:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -87,11 +87,32 @@ CREATE TABLE `user` (
   `age` int(2) DEFAULT NULL,
   `deleteFlag` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '张三', '123456', '20', '0');
-INSERT INTO `user` VALUES ('2', '李四', '654321', '19', '0');
-INSERT INTO `user` VALUES ('3', '张三2', '123456', '20', '0');
+INSERT INTO `user` VALUES ('1', '张三1', '123456', '1', '0');
+INSERT INTO `user` VALUES ('2', '李四2', '123456', '2', '0');
+INSERT INTO `user` VALUES ('3', '张三3', '123456', '3', '0');
+INSERT INTO `user` VALUES ('4', '张三4', '123456', '4', '0');
+INSERT INTO `user` VALUES ('5', '李四5', '123456', '5', '0');
+INSERT INTO `user` VALUES ('6', '张三6', '123456', '6', '0');
+INSERT INTO `user` VALUES ('7', '张三7', '123456', '7', '0');
+INSERT INTO `user` VALUES ('8', '李四8', '123456', '8', '0');
+INSERT INTO `user` VALUES ('9', '张三9', '123456', '9', '0');
+INSERT INTO `user` VALUES ('10', '张三10', '123456', '10', '0');
+INSERT INTO `user` VALUES ('11', '李四11', '123456', '11', '0');
+INSERT INTO `user` VALUES ('12', '张三12', '123456', '12', '0');
+INSERT INTO `user` VALUES ('13', '张三13', '123456', '13', '0');
+INSERT INTO `user` VALUES ('14', '李四14', '123456', '14', '0');
+INSERT INTO `user` VALUES ('15', '张三15', '123456', '15', '0');
+INSERT INTO `user` VALUES ('16', '张三16', '123456', '16', '0');
+INSERT INTO `user` VALUES ('17', '李四17', '123456', '17', '0');
+INSERT INTO `user` VALUES ('18', '张三18', '123456', '18', '0');
+INSERT INTO `user` VALUES ('19', '张三19', '123456', '19', '0');
+INSERT INTO `user` VALUES ('20', '李四20', '123456', '20', '0');
+INSERT INTO `user` VALUES ('21', '张三21', '123456', '21', '0');
+INSERT INTO `user` VALUES ('22', '张三22', '123456', '22', '0');
+INSERT INTO `user` VALUES ('23', '李四23', '123456', '23', '0');
+INSERT INTO `user` VALUES ('24', '张三24', '123456', '24', '0');
