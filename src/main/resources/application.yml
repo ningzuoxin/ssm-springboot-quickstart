@@ -1,5 +1,8 @@
 server:
   port: 9999
+  servlet:
+    session:
+      timeout: 3
 
 spring:
   datasource:
@@ -31,6 +34,11 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
+  session:
+    store-type: redis # 会话存储类型
+    redis:
+      flush-mode: on_save
+      namespace: SESSION
 
 # mybatis-plus
 mybatis-plus:
