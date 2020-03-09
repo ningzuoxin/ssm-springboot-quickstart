@@ -5,10 +5,12 @@ import com.ning.core.annotation.AccessLimit;
 import com.ning.core.model.Result;
 import com.ning.core.util.SignUtil;
 import com.ning.modular.entity.User;
+import com.ning.modular.model.dto.UserDTO;
 import com.ning.modular.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -122,6 +124,18 @@ public class UserController {
     @PostMapping(value = "/moreDb")
     public Result moreDb() {
         return userService.moreDb();
+    }
+
+    /**
+     * 参数校验
+     *
+     * @param userDTO
+     * @return
+     */
+    @ApiOperation(value = "参数校验")
+    @PostMapping(value = "/validate")
+    public Result paramValidate(@RequestBody @Validated UserDTO userDTO) {
+        return new Result();
     }
 
 }
