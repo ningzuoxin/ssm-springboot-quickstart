@@ -1,9 +1,11 @@
 package com.ning.modular.service;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ning.core.model.Result;
+import com.ning.core.util.JwtUtils;
 import com.ning.core.util.RedisUtil;
 import com.ning.modular.dao.UserDao;
 import com.ning.modular.dao.slave.MenuDao;
@@ -78,11 +80,41 @@ public class UserService {
      *
      * @return
      */
+    @SuppressWarnings("Duplicates")
     public Result moreDb() {
         Result result = new Result();
         Map<String, Object> map = new HashMap<>();
         map.put("users", userDao.selectAll());
         map.put("menus", menuDao.selectList(new QueryWrapper<>()));
+        result.setData(map);
+        return result;
+    }
+
+    /**
+     * 登录
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    @SuppressWarnings("Duplicates")
+    public Result login(String username, String password) {
+        Result result = new Result();
+        Map<String, Object> map = new HashMap<>();
+        map.put("user", "");
+        map.put("token", "");
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("name", username);
+        queryWrapper.eq("password", password);
+        User user = userDao.selectOne(queryWrapper);
+
+        if (ObjectUtil.isNotEmpty(user)) {
+            String token = JwtUtils.createToken(Convert.toStr(user.getId()), user.getName(), user.getName());
+            map.put("user", user);
+            map.put("token", token);
+        }
+
         result.setData(map);
         return result;
     }

@@ -2,6 +2,7 @@ package com.ning.modular.controller.api;
 
 import cn.hutool.core.date.DateUtil;
 import com.ning.core.annotation.AccessLimit;
+import com.ning.core.annotation.PassToken;
 import com.ning.core.model.Result;
 import com.ning.core.util.SignUtil;
 import com.ning.modular.entity.User;
@@ -138,4 +139,17 @@ public class UserController {
         return new Result();
     }
 
+    /**
+     * 登录
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    @ApiOperation(value = "登录")
+    @PassToken
+    @PostMapping(value = "/login")
+    public Result login(String username, String password) {
+        return userService.login(username, password);
+    }
 }

@@ -29,6 +29,7 @@
         <beetl.version>1.2.23.RELEASE</beetl.version>
         <spring.session.version>2.2.2.RELEASE</spring.session.version>
         <dynamic.datasource.version>3.0.0</dynamic.datasource.version>
+        <jwt.version>3.10.0</jwt.version>
     </properties>
 
     <dependencies>
@@ -168,6 +169,13 @@
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
             <version>${dynamic.datasource.version}</version>
+        </dependency>
+
+        <!--Jwt-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${jwt.version}</version>
         </dependency>
 
     </dependencies>

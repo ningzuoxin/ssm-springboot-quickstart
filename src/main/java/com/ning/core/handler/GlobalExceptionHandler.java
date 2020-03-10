@@ -86,4 +86,19 @@ public class GlobalExceptionHandler {
         return JsonResult.fail(message);
     }
 
+    /**
+     * 拦截RuntimeException
+     *
+     * @param response
+     * @param ex
+     * @return
+     */
+    @ResponseBody
+    @ExceptionHandler(RuntimeException.class)
+    public Result runtimeException(HttpServletResponse response, RuntimeException ex) {
+        Result result = new Result();
+        result.setData(ex.getMessage());
+        return result;
+    }
+
 }
