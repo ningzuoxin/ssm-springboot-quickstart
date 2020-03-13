@@ -46,7 +46,7 @@ spring:
   # Redis连接
   redis:
     host: 127.0.0.1
-    # host: 10.0.75.1
+    # host: 10.0.75.1  # 宿主机IP
     port: 6379
     database: 15
     password:

@@ -15,8 +15,8 @@ SpringBoot 2.2.5 + MyBatis Plus 3.3.1 + Hutool 5.1.5 + Undertow 2.2.5
 4.  修改application.yml中数据库username和password。
 5.  启动Application。
 
-#### 使用说明
+#### 注意事项
 
-1.  xxxx
+1.  Docker容器访问宿主机MySQL数据库？
 2.  xxxx
 3.  xxxx
