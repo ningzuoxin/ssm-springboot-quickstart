@@ -1,0 +1,4 @@
+FROM java:8
+MAINTAINER ning <412568142@qq.com>
+ADD ssm-springboot-quickstart.jar app.jar
+CMD java -jar app.jar

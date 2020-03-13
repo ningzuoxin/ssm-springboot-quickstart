@@ -30,12 +30,14 @@ spring:
         master:
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://127.0.0.1:3306/my_test_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+          # url: jdbc:mysql://10.0.75.1:3306/my_test_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
           username: root
           password: 123456
         # 从库
         slave:
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://127.0.0.1:3306/my_test_db2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+          # url: jdbc:mysql://10.0.75.1:3306/my_test_db2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
           username: root
           password: 123456
   # 激活的配置文件
@@ -44,6 +46,7 @@ spring:
   # Redis连接
   redis:
     host: 127.0.0.1
+    # host: 10.0.75.1
     port: 6379
     database: 15
     password:
