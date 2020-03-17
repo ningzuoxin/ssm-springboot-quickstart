@@ -6,7 +6,7 @@
 
     <Properties>
         <property name="LOG_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
-        <property name="FILE_PATH" value="D:\\prod_logs"/>
+        <property name="FILE_PATH" value="D:\\logs\\prod_logs"/>
         <property name="FILE_NAME" value="ssm_springboot_quickstart"/>
     </Properties>
 

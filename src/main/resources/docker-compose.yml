@@ -1,0 +1,15 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 7091:80
+    links:
+      - app
+    volumes:
+      # - /d/docker_volumes/docker-compose/nginx/conf:/etc/nginx/conf.d
+      - /d/docker_volumes/docker-compose/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+  app:
+    image: ssm_sp_local
+    expose:
+      - "9999"
