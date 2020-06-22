@@ -26,8 +26,8 @@ public class WebConfig implements WebMvcConfigurer {
         excludePathPatterns.add("/swagger-resources/**");
         excludePathPatterns.add("/doc.html");
         excludePathPatterns.add("/error");
-        registry.addInterceptor(limitInterceptor).excludePathPatterns(excludePathPatterns).addPathPatterns("/**");
-        registry.addInterceptor(jwtAuthenticationInterceptor).excludePathPatterns(excludePathPatterns).addPathPatterns("/**");
+//        registry.addInterceptor(limitInterceptor).excludePathPatterns(excludePathPatterns).addPathPatterns("/**");
+//        registry.addInterceptor(jwtAuthenticationInterceptor).excludePathPatterns(excludePathPatterns).addPathPatterns("/**");
     }
 
 }
