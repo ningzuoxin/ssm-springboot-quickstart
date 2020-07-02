@@ -1,61 +1,46 @@
 package com.ning.config;
 
-import com.ning.core.repository.UserDetailsRepository;
-import org.springframework.context.annotation.Bean;
+import com.ning.core.repository.MyUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class SecurityConfig {
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public UserDetailsRepository userDetailsRepository() {
-        System.out.println("SecurityConfig userDetailsRepository");
-        UserDetailsRepository userDetailsRepository = new UserDetailsRepository();
-        // 为了让我们的登录能够运行 这里我们初始化一个用户Felordcn 密码采用明文 当你在密码12345上使用了前缀{noop} 意味着你的密码不使用加密，authorities 一定不能为空 这代表用户的角色权限集合
-        UserDetails mrcode = User.withUsername("mrcode").password("{noop}12345").authorities(AuthorityUtils.NO_AUTHORITIES).build();
-        userDetailsRepository.createUser(mrcode);
-        return userDetailsRepository;
+    @Autowired
+    MyUserDetailsService myUserDetailsService;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(myUserDetailsService).passwordEncoder(new PasswordEncoder() {
+            @Override
+            public String encode(CharSequence charSequence) {
+                return charSequence.toString();
+            }
+
+            @Override
+            public boolean matches(CharSequence charSequence, String s) {
+                return s.equals(charSequence.toString());
+            }
+        });
     }
 
-    @Bean
-    public UserDetailsManager userDetailsManager(UserDetailsRepository userDetailsRepository) {
-        System.out.println("SecurityConfig userDetailsManager");
-        return new UserDetailsManager() {
-            @Override
-            public void createUser(UserDetails user) {
-                userDetailsRepository.createUser(user);
-            }
-
-            @Override
-            public void updateUser(UserDetails user) {
-                userDetailsRepository.updateUser(user);
-            }
-
-            @Override
-            public void deleteUser(String username) {
-                userDetailsRepository.deleteUser(username);
-            }
-
-            @Override
-            public void changePassword(String oldPassword, String newPassword) {
-                userDetailsRepository.changePassword(oldPassword, newPassword);
-            }
-
-            @Override
-            public boolean userExists(String username) {
-                return userDetailsRepository.userExists(username);
-            }
-
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return userDetailsRepository.loadUserByUsername(username);
-            }
-        };
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/actuator", "/actuator/**").authenticated();
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        // 设置拦截忽略文件夹，可以对静态资源放行
+        web.ignoring().antMatchers("/dist/**", "/vendor/**");
+    }
 }
